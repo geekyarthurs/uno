@@ -120,7 +120,7 @@ namespace Uno.UI.SourceGenerators.XamlGenerator
 			if (noRoot)
 			{
 				// Prepend a dummy root so that GetFullPath doesn't try to add the working directory. We remove it immediately afterward.
-				originDirectory = "C:\\" + originDirectory;
+				originDirectory = "C:/" + originDirectory;
 			}
 			var absoluteTargetPath = Path.GetFullPath(
 					Path.Combine(originDirectory, relativeTargetPath)
