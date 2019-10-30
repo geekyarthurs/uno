@@ -68,7 +68,18 @@ namespace Uno.UI.SourceGenerators.XamlGenerator
 				return ConvertIdToResourceDictionaryProperty(xamlFileDefinition.UniqueID);
 			}
 
-			throw new InvalidOperationException($"{source} not found for MergedDictionary in {targetSource}");
+			//throw new InvalidOperationException($"{source} not found for MergedDictionary in {targetSource}");
+			throw new InvalidOperationException($"{source} resolved to {absoluteSource} not found for MergedDictionary in {targetSource}. Options: {GetAvailableSources()}"); //TODO: temporary
+
+			string GetAvailableSources()
+			{
+				var output = "";
+				foreach (var kvp in _rdMap)
+				{
+					output += $"({kvp.Key}: {kvp.Value}) ";
+				}
+				return output;
+			}
 		}
 
 		/// <summary>
