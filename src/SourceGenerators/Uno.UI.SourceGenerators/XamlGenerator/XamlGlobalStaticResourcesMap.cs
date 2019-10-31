@@ -117,17 +117,21 @@ namespace Uno.UI.SourceGenerators.XamlGenerator
 		private string GetAbsolutePath(string originDirectory, string relativeTargetPath)
 		{
 			var noRoot = Path.GetPathRoot(originDirectory).Length == 0;
+			var rootLength = 0;
 			if (noRoot)
 			{
+				var root = Path.GetPathRoot(Directory.GetCurrentDirectory());
+				Console.WriteLine(root); //TEMP
+				rootLength = root.Length;
 				// Prepend a dummy root so that GetFullPath doesn't try to add the working directory. We remove it immediately afterward.
-				originDirectory = "C:/" + originDirectory;
+				originDirectory = root + originDirectory;
 			}
 			var absoluteTargetPath = Path.GetFullPath(
 					Path.Combine(originDirectory, relativeTargetPath)
 				);
 			if (noRoot)
 			{
-				absoluteTargetPath = absoluteTargetPath.Substring(3);
+				absoluteTargetPath = absoluteTargetPath.Substring(rootLength);
 			}
 
 			return absoluteTargetPath;
